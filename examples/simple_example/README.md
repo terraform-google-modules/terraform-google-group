@@ -7,14 +7,8 @@ This example illustrates how to use the `group` module.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| bucket\_name | The name of the bucket to create. | string | n/a | yes |
-| project\_id | The ID of the project in which to provision resources. | string | n/a | yes |
-
-## Outputs
-
-| Name | Description |
-|------|-------------|
-| bucket\_name | The name of the bucket. |
+| domain | Domain of the organization to create the group in | string | `""` | no |
+| project\_id | The ID of the project in which to provision resources and used for billing | string | n/a | yes |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 

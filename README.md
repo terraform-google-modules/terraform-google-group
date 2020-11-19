@@ -1,43 +1,77 @@
 # terraform-google-group
 
-This module was generated from [terraform-google-module-template](https://github.com/terraform-google-modules/terraform-google-module-template/), which by default generates a module that simply creates a GCS bucket. As the module develops, this README should be updated.
-
-The resources/services/activations/deletions that this module will create/trigger are:
-
-- Create a GCS bucket with the provided name
+This module manages Cloud Identity Groups and Memberships using the
+[Cloud Identity Group API](https://cloud.google.com/identity/docs/groups).
 
 ## Usage
 
 Basic usage of this module is as follows:
 
 ```hcl
+# Required if using User ADCs (Application Default Credentials) for Cloud Identity API.
+provider "google-beta" {
+  user_project_override = true
+  billing_project       = "<PROJECT_ID>"
+}
+
 module "group" {
   source  = "terraform-google-modules/group/google"
   version = "~> 0.1"
 
-  project_id  = "<PROJECT ID>"
-  bucket_name = "gcs-test-bucket"
+  id           = "example-group@example.com"
+  display_name = "example-group"
+  description  = "Example group"
+  domain       = "example.com"
+  owners       = ["foo@example.com"]
+  managers     = ["example-sa@my-project.iam.gserviceaccount.com"]
+  members      = ["another-group@example.com"]
 }
 ```
 
-Functional examples are included in the
-[examples](./examples/) directory.
+Functional examples are included in the [examples](./examples/) directory.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| bucket\_name | The name of the bucket to create | string | n/a | yes |
-| project\_id | The project ID to deploy to | string | n/a | yes |
+| customer\_id | Customer ID of the organization to create the group in. One of domain or customer_id must be specified | string | `""` | no |
+| description | Description of the group | string | `""` | no |
+| display\_name | Display name of the group | string | `""` | no |
+| domain | Domain of the organization to create the group in. One of domain or customer_id must be specified | string | `""` | no |
+| id | ID of the group. For Google-managed entities, the ID must be the email address the group | string | n/a | yes |
+| managers | Managers of the group. Each entry is the ID of an entity. For Google-managed entities, the ID must be the email address of an existing group, user or service account | list | `<list>` | no |
+| members | Members of the group. Each entry is the ID of an entity. For Google-managed entities, the ID must be the email address of an existing group, user or service account | list | `<list>` | no |
+| owners | Owners of the group. Each entry is the ID of an entity. For Google-managed entities, the ID must be the email address of an existing group, user or service account | list | `<list>` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| bucket\_name |  |
+| id | ID of the group. For Google-managed entities, the ID is the email address the group |
+| resource\_name | Resource name of the group in the format: groups/{group_id}, where group_id is the unique ID assigned to the group. |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+
+## Limitations
+
+The provider is still under development, the following are known issues or
+limitations:
+
+* Updating a `google_cloud_identity_group_membership` to remove a role fails
+    with an error
+    ([link](https://github.com/hashicorp/terraform-provider-google/issues/7616)).
+
+* [InitialGroupConfig](https://cloud.google.com/identity/docs/reference/rest/v1beta1/groups/create#initialgroupconfig)
+    is not supported in the `google_cloud_identity_group` resource, which
+    prevents non-admins from creating groups in an organization, even when the
+    organization is configured to allow anyone to create groups.
+
+* Only
+    [Google Groups](https://cloud.google.com/identity/docs/groups#group_properties)
+    are supported.
+
+* Last `OWNER` cannot be removed from a Google Group.
 
 ## Requirements
 
@@ -47,34 +81,59 @@ These sections describe requirements for using this module.
 
 The following dependencies must be available:
 
-- [Terraform][terraform] v0.12
-- [Terraform Provider for GCP][terraform-provider-gcp] plugin v2.0
+* [Terraform][terraform] v0.12
+* [Terraform Provider for GCP][terraform-provider-gcp] plugin v2.0
 
-### Service Account
+### Permissions
 
-A service account with the following roles must be used to provision
-the resources of this module:
+A service account or user account needs the following roles to provision the
+resources of this module:
 
-- Storage Admin: `roles/storage.admin`
+#### Google Cloud IAM roles
+
+* Service Usage Consumer: `roles/serviceusage.serviceUsageConsumer` on the
+    billing project
+* Organization Viewer: `roles/resourcemanager.organizationViewer` if using
+    `domain` instead of `customer_id`
 
 The [Project Factory module][project-factory-module] and the
-[IAM module][iam-module] may be used in combination to provision a
-service account with the necessary roles applied.
+[IAM module][iam-module] may be used in combination to provision a service
+account with the necessary roles applied.
+
+#### Google Workspace (formerly known as G Suite) roles
+
+* [Group Admin role](https://support.google.com/a/answer/2405986?hl=en)
+
+To make the service account a Group Admin, you must have Google Workspace Super
+Admin access for your domain. Follow
+[Assigning an admin role to the service account](https://cloud.google.com/identity/docs/how-to/setup#assigning_an_admin_role_to_the_service_account)
+for instructions.
+
+To create groups as an end user, the caller is required to authenticate as a
+member of the domain, i.e. you cannot use this module to create a group under
+`bar.com` with a `foo.com` user identity.
+
+After the groups have been created, the organization’s Super Admin, Group Admin
+or any custom role with Groups privilege can always modify and delete the groups
+and their memberships. In addition, the group’s OWNER and MANAGER can edit
+membership, and OWNER can delete the group. Documentation around the three group
+default roles (OWNER, MANAGER and MEMBER) can be found
+[here](https://support.google.com/a/answer/167094?hl=en).
 
 ### APIs
 
-A project with the following APIs enabled must be used to host the
-resources of this module:
+A project with the following APIs enabled must be used to host the resources of
+this module:
 
-- Google Cloud Storage JSON API: `storage-api.googleapis.com`
+* Cloud Identity API: `cloudidentity.googleapis.com`
 
-The [Project Factory module][project-factory-module] can be used to
-provision a project with the necessary APIs enabled.
+The [Project Factory module][project-factory-module] can be used to provision a
+project with the necessary APIs enabled.
 
 ## Contributing
 
-Refer to the [contribution guidelines](./CONTRIBUTING.md) for
-information on contributing to this module.
+Refer to the [contribution guidelines](./CONTRIBUTING.md) for information on
+contributing to this module.
 
 [iam-module]: https://registry.terraform.io/modules/terraform-google-modules/iam/google
 [project-factory-module]: https://registry.terraform.io/modules/terraform-google-modules/project-factory/google

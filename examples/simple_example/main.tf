@@ -14,13 +14,47 @@
  * limitations under the License.
  */
 
-provider "google" {
-  version = "~> 2.0"
+provider "google-beta" {
+  version = "~> 3.0"
+  # Required if using User ADCs (Application Default Credentials) for Cloud Identity API.
+  user_project_override = true
+  billing_project       = var.project_id
+}
+
+resource "google_service_account" "owner" {
+  account_id = "example-owner-sa"
+  project    = var.project_id
+}
+
+resource "google_service_account" "manager" {
+  account_id = "example-manager-sa"
+  project    = var.project_id
+}
+
+resource "google_service_account" "member" {
+  account_id = "example-member-sa"
+  project    = var.project_id
+}
+
+module "child_group" {
+  source = "../.."
+
+  id           = "example-child-group@${var.domain}"
+  display_name = "example-child-group"
+  description  = "Example child group"
+  domain       = var.domain
+  owners       = ["${google_service_account.owner.account_id}@${var.project_id}.iam.gserviceaccount.com"]
+  managers     = ["${google_service_account.manager.account_id}@${var.project_id}.iam.gserviceaccount.com"]
+  members      = ["${google_service_account.member.account_id}@${var.project_id}.iam.gserviceaccount.com"]
 }
 
 module "group" {
   source = "../.."
 
-  project_id  = var.project_id
-  bucket_name = var.bucket_name
+  id           = "example-group@${var.domain}"
+  display_name = "example-group"
+  description  = "Example group"
+  domain       = var.domain
+  owners       = ["${google_service_account.owner.account_id}@${var.project_id}.iam.gserviceaccount.com"]
+  members      = [module.child_group.id]
 }
