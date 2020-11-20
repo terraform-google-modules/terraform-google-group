@@ -21,11 +21,6 @@ provider "google-beta" {
   billing_project       = var.project_id
 }
 
-resource "google_service_account" "owner" {
-  account_id = "example-owner-sa"
-  project    = var.project_id
-}
-
 resource "google_service_account" "manager" {
   account_id = "example-manager-sa"
   project    = var.project_id
@@ -43,7 +38,6 @@ module "child_group" {
   display_name = "example-child-group"
   description  = "Example child group"
   domain       = var.domain
-  owners       = ["${google_service_account.owner.account_id}@${var.project_id}.iam.gserviceaccount.com"]
   managers     = ["${google_service_account.manager.account_id}@${var.project_id}.iam.gserviceaccount.com"]
   members      = ["${google_service_account.member.account_id}@${var.project_id}.iam.gserviceaccount.com"]
 }
@@ -55,6 +49,5 @@ module "group" {
   display_name = "example-group"
   description  = "Example group"
   domain       = var.domain
-  owners       = ["${google_service_account.owner.account_id}@${var.project_id}.iam.gserviceaccount.com"]
   members      = [module.child_group.id]
 }
