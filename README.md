@@ -130,6 +130,9 @@ this module:
 The [Project Factory module][project-factory-module] can be used to provision a
 project with the necessary APIs enabled.
 
+To use the Cloud Identity Groups API, you must have Google Groups for Business
+enabled for your domain and allow end users to create groups.
+
 ## Contributing
 
 Refer to the [contribution guidelines](./CONTRIBUTING.md) for information on

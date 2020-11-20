@@ -32,15 +32,6 @@ locals {
   }
 }
 
-resource "null_resource" "customer_id_is_empty" {
-  count = local.customer_id == "" ? 1 : 0
-
-  provisioner "local-exec" {
-    command     = "echo 'neither domain nor customer_id is specified' >&2; false"
-    interpreter = ["bash", "-c"]
-  }
-}
-
 resource "google_cloud_identity_group" "group" {
   provider     = google-beta
   display_name = var.display_name
@@ -55,10 +46,6 @@ resource "google_cloud_identity_group" "group" {
   labels = {
     local.label_keys[local.type] = ""
   }
-
-  depends_on = [
-    null_resource.customer_id_is_empty
-  ]
 }
 
 resource "google_cloud_identity_group_membership" "owners" {
