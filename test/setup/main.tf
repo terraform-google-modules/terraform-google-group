@@ -25,3 +25,13 @@ data "terraform_remote_state" "org" {
 data "google_organization" "org" {
   organization = "organizations/${data.terraform_remote_state.org.outputs.org_id}"
 }
+
+resource "google_organization_iam_member" "sa_org" {
+  for_each = toset([
+    "roles/resourcemanager.organizationViewer"
+  ])
+
+  org_id = data.terraform_remote_state.org.outputs.org_id
+  role   = each.value
+  member = "serviceAccount:${data.terraform_remote_state.org.outputs.ci_gsuite_sa_email}"
+}
