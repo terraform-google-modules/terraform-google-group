@@ -21,3 +21,7 @@ data "terraform_remote_state" "org" {
     prefix = "state/org"
   }
 }
+
+data "google_organization" "org" {
+  organization = "organizations/${data.terraform_remote_state.org.outputs.org_id}"
+}
