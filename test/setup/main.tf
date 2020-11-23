@@ -14,20 +14,10 @@
  * limitations under the License.
  */
 
-module "project" {
-  source  = "terraform-google-modules/project-factory/google"
-  version = "~> 8.0"
-
-  name                 = "ci-group"
-  random_project_id    = "true"
-  org_id               = var.org_id
-  folder_id            = var.folder_id
-  billing_account      = var.billing_account
-  skip_gcloud_download = true
-
-  activate_apis = [
-    "cloudresourcemanager.googleapis.com",
-    "storage-api.googleapis.com",
-    "serviceusage.googleapis.com"
-  ]
+data "terraform_remote_state" "org" {
+  backend = "gcs"
+  config = {
+    bucket = "cft-infra-test-tfstate"
+    prefix = "state/org"
+  }
 }
