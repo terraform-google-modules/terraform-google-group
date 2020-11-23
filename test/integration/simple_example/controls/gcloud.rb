@@ -25,5 +25,20 @@ control "gcloud" do
     its(:stderr) { should eq "" }
   end
 
+  describe command("gcloud beta identity groups memberships describe --group-email example-group@#{attribute("domain")} --member-email example-child-group@#{attribute("domain")} --project=#{attribute("project_id")}") do
+    its(:exit_status) { should eq 0 }
+    its(:stderr) { should eq "" }
+  end
+
+  describe command("gcloud beta identity groups memberships describe --group-email example-child-group@#{attribute("domain")} --member-email example-manager-sa@#{attribute("project_id")}.iam.gserviceaccount.com --project=#{attribute("project_id")}") do
+    its(:exit_status) { should eq 0 }
+    its(:stderr) { should eq "" }
+  end
+
+  describe command("gcloud beta identity groups memberships describe --group-email example-child-group@#{attribute("domain")} --member-email example-member-sa@#{attribute("project_id")}.iam.gserviceaccount.com --project=#{attribute("project_id")}") do
+    its(:exit_status) { should eq 0 }
+    its(:stderr) { should eq "" }
+  end
+
 end
 
