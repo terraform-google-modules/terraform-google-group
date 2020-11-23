@@ -34,22 +34,22 @@ Functional examples are included in the [examples](./examples/) directory.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|:----:|:-----:|:-----:|
-| customer\_id | Customer ID of the organization to create the group in. One of domain or customer_id must be specified | string | `""` | no |
-| description | Description of the group | string | `""` | no |
-| display\_name | Display name of the group | string | `""` | no |
-| domain | Domain of the organization to create the group in. One of domain or customer_id must be specified | string | `""` | no |
-| id | ID of the group. For Google-managed entities, the ID must be the email address the group | string | n/a | yes |
-| managers | Managers of the group. Each entry is the ID of an entity. For Google-managed entities, the ID must be the email address of an existing group, user or service account | list | `<list>` | no |
-| members | Members of the group. Each entry is the ID of an entity. For Google-managed entities, the ID must be the email address of an existing group, user or service account | list | `<list>` | no |
-| owners | Owners of the group. Each entry is the ID of an entity. For Google-managed entities, the ID must be the email address of an existing group, user or service account | list | `<list>` | no |
+|------|-------------|------|---------|:--------:|
+| customer\_id | Customer ID of the organization to create the group in. One of domain or customer\_id must be specified | `string` | `""` | no |
+| description | Description of the group | `string` | `""` | no |
+| display\_name | Display name of the group | `string` | `""` | no |
+| domain | Domain of the organization to create the group in. One of domain or customer\_id must be specified | `string` | `""` | no |
+| id | ID of the group. For Google-managed entities, the ID must be the email address the group | `any` | n/a | yes |
+| managers | Managers of the group. Each entry is the ID of an entity. For Google-managed entities, the ID must be the email address of an existing group, user or service account | `list` | `[]` | no |
+| members | Members of the group. Each entry is the ID of an entity. For Google-managed entities, the ID must be the email address of an existing group, user or service account | `list` | `[]` | no |
+| owners | Owners of the group. Each entry is the ID of an entity. For Google-managed entities, the ID must be the email address of an existing group, user or service account | `list` | `[]` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
 | id | ID of the group. For Google-managed entities, the ID is the email address the group |
-| resource\_name | Resource name of the group in the format: groups/{group_id}, where group_id is the unique ID assigned to the group. |
+| resource\_name | Resource name of the group in the format: groups/{group\_id}, where group\_id is the unique ID assigned to the group. |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 

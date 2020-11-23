@@ -6,9 +6,13 @@ This example illustrates how to use the `group` module.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|:----:|:-----:|:-----:|
-| domain | Domain of the organization to create the group in | string | n/a | yes |
-| project\_id | The ID of the project in which to provision resources and used for billing | string | n/a | yes |
+|------|-------------|------|---------|:--------:|
+| domain | Domain of the organization to create the group in | `string` | n/a | yes |
+| project\_id | The ID of the project in which to provision resources and used for billing | `string` | n/a | yes |
+
+## Outputs
+
+No output.
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
