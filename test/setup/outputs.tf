@@ -24,5 +24,5 @@ output "sa_key" {
 }
 
 output "domain" {
-  value     = data.google_organization.org.domain
+  value = data.google_organization.org.domain
 }
