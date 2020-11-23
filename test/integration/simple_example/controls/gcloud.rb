@@ -15,9 +15,15 @@
 control "gcloud" do
   title "gcloud"
 
-  describe command("gcloud --project=#{attribute("project_id")} services list --enabled") do
+  describe command("gcloud identity groups describe example-group@#{attribute("domain")} --billing-project=#{attribute("project_id")}") do
     its(:exit_status) { should eq 0 }
     its(:stderr) { should eq "" }
-    its(:stdout) { should match "storage-api.googleapis.com" }
   end
+
+  describe command("gcloud identity groups describe example-child-group@#{attribute("domain")} --billing-project=#{attribute("project_id")}") do
+    its(:exit_status) { should eq 0 }
+    its(:stderr) { should eq "" }
+  end
+
 end
+

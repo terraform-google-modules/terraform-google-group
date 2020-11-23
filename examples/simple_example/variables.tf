@@ -21,5 +21,5 @@ variable "project_id" {
 
 variable "domain" {
   description = "Domain of the organization to create the group in"
-  default     = ""
+  type        = string
 }
