@@ -21,16 +21,6 @@ provider "google-beta" {
   billing_project       = var.project_id
 }
 
-resource "google_service_account" "manager" {
-  account_id = "example-manager-sa"
-  project    = var.project_id
-}
-
-resource "google_service_account" "member" {
-  account_id = "example-member-sa"
-  project    = var.project_id
-}
-
 module "child_group" {
   source = "../.."
 
@@ -38,8 +28,8 @@ module "child_group" {
   display_name = "example-child-group"
   description  = "Example child group"
   domain       = var.domain
-  managers     = ["${google_service_account.manager.account_id}@${var.project_id}.iam.gserviceaccount.com"]
-  members      = ["${google_service_account.member.account_id}@${var.project_id}.iam.gserviceaccount.com"]
+  managers     = [var.manager_service_account_email]
+  members      = [var.member_service_account_email]
 }
 
 module "group" {

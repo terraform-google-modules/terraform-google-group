@@ -23,3 +23,13 @@ output "domain" {
   description = "Domain of the organization to create the group in"
   value       = var.domain
 }
+
+output "member_service_account_email" {
+  description = "Email of the service account to grant the MEMBER role in the group"
+  value       = var.member_service_account_email
+}
+
+output "manager_service_account_email" {
+  description = "Email of the service account to grant the MANAGER role in the group"
+  value       = var.manager_service_account_email
+}

@@ -23,3 +23,13 @@ variable "domain" {
   description = "Domain of the organization to create the group in"
   type        = string
 }
+
+variable "member_service_account_email" {
+  description = "Email of the service account to grant the MEMBER role in the group"
+  type        = string
+}
+
+variable "manager_service_account_email" {
+  description = "Email of the service account to grant the MANAGER role in the group"
+  type        = string
+}

@@ -23,7 +23,7 @@ data "terraform_remote_state" "org" {
 }
 
 data "google_organization" "org" {
-  organization = "organizations/${data.terraform_remote_state.org.outputs.org_id}"
+  organization = "organizations/${var.org_id}"
 }
 
 resource "google_organization_iam_member" "sa_org" {
@@ -31,7 +31,37 @@ resource "google_organization_iam_member" "sa_org" {
     "roles/resourcemanager.organizationViewer"
   ])
 
-  org_id = data.terraform_remote_state.org.outputs.org_id
+  org_id = var.org_id
   role   = each.value
   member = "serviceAccount:${data.terraform_remote_state.org.outputs.ci_gsuite_sa_email}"
+}
+
+// Create a temporary project to host group member service accounts to pass to the examples.
+module "project" {
+  source  = "terraform-google-modules/project-factory/google"
+  version = "~> 8.0"
+
+  name                 = "ci-group"
+  random_project_id    = "true"
+  org_id               = var.org_id
+  folder_id            = var.folder_id
+  billing_account      = var.billing_account
+  skip_gcloud_download = true
+
+  activate_apis = [
+    "cloudresourcemanager.googleapis.com",
+    "serviceusage.googleapis.com"
+  ]
+}
+
+resource "google_service_account" "member" {
+  project      = module.project.project_id
+  account_id   = "example-member"
+  display_name = "example-member"
+}
+
+resource "google_service_account" "manager" {
+  project      = module.project.project_id
+  account_id   = "example-manager"
+  display_name = "example-manager"
 }

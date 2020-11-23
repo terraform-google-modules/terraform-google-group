@@ -26,3 +26,11 @@ output "sa_key" {
 output "domain" {
   value = data.google_organization.org.domain
 }
+
+output "member_service_account_email" {
+  value = google_service_account.member.email
+}
+
+output "manager_service_account_email" {
+  value = google_service_account.manager.email
+}
