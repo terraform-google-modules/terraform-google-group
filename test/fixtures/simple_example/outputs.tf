@@ -13,3 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+output "project_id" {
+  description = "The ID of the project in which to provision resources and used for billing"
+  value       = var.project_id
+}
+
+output "domain" {
+  description = "Domain of the organization to create the group in"
+  value       = var.domain
+}

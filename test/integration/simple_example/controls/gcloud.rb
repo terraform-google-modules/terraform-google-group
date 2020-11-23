@@ -15,12 +15,12 @@
 control "gcloud" do
   title "gcloud"
 
-  describe command("gcloud identity groups describe example-group@#{attribute("domain")} --billing-project=#{attribute("project_id")}") do
+  describe command("gcloud beta identity groups describe example-group@#{attribute("domain")} --project=#{attribute("project_id")}") do
     its(:exit_status) { should eq 0 }
     its(:stderr) { should eq "" }
   end
 
-  describe command("gcloud identity groups describe example-child-group@#{attribute("domain")} --billing-project=#{attribute("project_id")}") do
+  describe command("gcloud beta identity groups describe example-child-group@#{attribute("domain")} --project=#{attribute("project_id")}") do
     its(:exit_status) { should eq 0 }
     its(:stderr) { should eq "" }
   end
