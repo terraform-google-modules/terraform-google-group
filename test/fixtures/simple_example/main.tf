@@ -16,7 +16,7 @@
 
 # Delete the example groups if they exist. The groups might be left undeleted due
 # to previously failed test runs.
-resource "null_resource" "cleanup_group" {
+resource "null_resource" "cleanup_groups" {
   provisioner "local-exec" {
     command = <<EOT
       if gcloud beta identity groups describe example-group@${var.domain} 2>/dev/null ; then
@@ -37,6 +37,6 @@ module "example" {
   domain        = var.domain
   sa_project_id = var.sa_project_id
   depends_on = [
-    null_resource.cleanup_group
+    null_resource.cleanup_groups
   ]
 }
