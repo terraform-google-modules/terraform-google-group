@@ -23,8 +23,3 @@ variable "domain" {
   description = "Domain of the organization to create the group in"
   type        = string
 }
-
-variable "sa_project_id" {
-  description = "The ID of the project in which to provision testing service accounts"
-  type        = string
-}

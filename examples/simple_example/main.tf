@@ -22,13 +22,13 @@
 # }
 
 resource "google_service_account" "manager" {
-  project      = var.sa_project_id
+  project      = var.project_id
   account_id   = "example-manager"
   display_name = "example-manager"
 }
 
 resource "google_service_account" "member" {
-  project      = var.sa_project_id
+  project      = var.project_id
   account_id   = "example-member"
   display_name = "example-member"
 }
@@ -40,8 +40,8 @@ module "child_group" {
   display_name = "example-child-group"
   description  = "Example child group"
   domain       = var.domain
-  managers     = ["${google_service_account.manager.account_id}@${var.sa_project_id}.iam.gserviceaccount.com"]
-  members      = ["${google_service_account.member.account_id}@${var.sa_project_id}.iam.gserviceaccount.com"]
+  managers     = ["${google_service_account.manager.account_id}@${var.project_id}.iam.gserviceaccount.com"]
+  members      = ["${google_service_account.member.account_id}@${var.project_id}.iam.gserviceaccount.com"]
 }
 
 module "group" {

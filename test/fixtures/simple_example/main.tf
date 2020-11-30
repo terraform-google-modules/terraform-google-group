@@ -33,9 +33,8 @@ resource "null_resource" "cleanup_groups" {
 module "example" {
   source = "../../../examples/simple_example"
 
-  project_id    = var.project_id
-  domain        = var.domain
-  sa_project_id = var.sa_project_id
+  project_id = var.project_id
+  domain     = var.domain
   depends_on = [
     null_resource.cleanup_groups
   ]

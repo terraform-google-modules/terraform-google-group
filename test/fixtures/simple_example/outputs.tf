@@ -23,8 +23,3 @@ output "domain" {
   description = "Domain of the organization to create the group in"
   value       = var.domain
 }
-
-output "sa_project_id" {
-  description = "The ID of the project in which to provision testing service accounts"
-  value       = var.sa_project_id
-}

@@ -9,7 +9,6 @@ This example illustrates how to use the `group` module.
 |------|-------------|------|---------|:--------:|
 | domain | Domain of the organization to create the group in | `string` | n/a | yes |
 | project\_id | The ID of the project in which to provision resources and used for billing | `string` | n/a | yes |
-| sa\_project\_id | The ID of the project in which to provision testing service accounts | `string` | n/a | yes |
 
 ## Outputs
 

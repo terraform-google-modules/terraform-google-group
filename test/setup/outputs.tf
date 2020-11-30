@@ -15,7 +15,7 @@
  */
 
 output "project_id" {
-  value = data.terraform_remote_state.org.outputs.ci_gsuite_sa_project_id
+  value = module.project.project_id
 }
 
 output "sa_key" {
@@ -25,8 +25,4 @@ output "sa_key" {
 
 output "domain" {
   value = data.google_organization.org.domain
-}
-
-output "sa_project_id" {
-  value = module.project.project_id
 }
