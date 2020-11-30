@@ -15,11 +15,11 @@
  */
 
 variable "project_id" {
-  description = "The ID of the project in which to provision resources."
+  description = "The ID of the project in which to provision resources and used for billing"
   type        = string
 }
 
-variable "bucket_name" {
-  description = "The name of the bucket to create."
+variable "domain" {
+  description = "Domain of the organization to create the group in"
   type        = string
 }

@@ -14,20 +14,52 @@
  * limitations under the License.
  */
 
+data "terraform_remote_state" "org" {
+  backend = "gcs"
+  config = {
+    bucket = "cft-infra-test-tfstate"
+    prefix = "state/org"
+  }
+}
+
+data "google_organization" "org" {
+  organization = "organizations/${var.org_id}"
+}
+
+resource "google_organization_iam_member" "sa_org" {
+  for_each = toset([
+    "roles/resourcemanager.organizationViewer"
+  ])
+
+  org_id = var.org_id
+  role   = each.value
+  member = "serviceAccount:${data.terraform_remote_state.org.outputs.ci_gsuite_sa_email}"
+}
+
+# Create a temporary project to host group member service accounts to pass to the examples.
 module "project" {
   source  = "terraform-google-modules/project-factory/google"
-  version = "~> 8.0"
+  version = "~> 9.0"
 
-  name              = "ci-group"
-  random_project_id = "true"
-  org_id            = var.org_id
-  folder_id         = var.folder_id
-  billing_account   = var.billing_account
+  name                 = "ci-group"
+  random_project_id    = "true"
+  org_id               = var.org_id
+  folder_id            = var.folder_id
+  billing_account      = var.billing_account
   skip_gcloud_download = true
 
   activate_apis = [
     "cloudresourcemanager.googleapis.com",
-    "storage-api.googleapis.com",
     "serviceusage.googleapis.com"
   ]
+}
+
+resource "google_project_iam_member" "sa_project" {
+  for_each = toset([
+    "roles/iam.serviceAccountAdmin"
+  ])
+
+  project = module.project.project_id
+  role    = each.value
+  member  = "serviceAccount:${data.terraform_remote_state.org.outputs.ci_gsuite_sa_email}"
 }

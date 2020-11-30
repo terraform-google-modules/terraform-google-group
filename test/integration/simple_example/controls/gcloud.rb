@@ -15,9 +15,30 @@
 control "gcloud" do
   title "gcloud"
 
-  describe command("gcloud --project=#{attribute("project_id")} services list --enabled") do
+  describe command("gcloud beta identity groups describe example-group@#{attribute("domain")} --project=#{attribute("project_id")}") do
     its(:exit_status) { should eq 0 }
     its(:stderr) { should eq "" }
-    its(:stdout) { should match "storage-api.googleapis.com" }
   end
+
+  describe command("gcloud beta identity groups describe example-child-group@#{attribute("domain")} --project=#{attribute("project_id")}") do
+    its(:exit_status) { should eq 0 }
+    its(:stderr) { should eq "" }
+  end
+
+  describe command("gcloud beta identity groups memberships describe --group-email example-group@#{attribute("domain")} --member-email example-child-group@#{attribute("domain")} --project=#{attribute("project_id")}") do
+    its(:exit_status) { should eq 0 }
+    its(:stderr) { should eq "" }
+  end
+
+  describe command("gcloud beta identity groups memberships describe --group-email example-child-group@#{attribute("domain")} --member-email example-manager@#{attribute("project_id")}.iam.gserviceaccount.com --project=#{attribute("project_id")}") do
+    its(:exit_status) { should eq 0 }
+    its(:stderr) { should eq "" }
+  end
+
+  describe command("gcloud beta identity groups memberships describe --group-email example-child-group@#{attribute("domain")} --member-email example-member@#{attribute("project_id")}.iam.gserviceaccount.com --project=#{attribute("project_id")}") do
+    its(:exit_status) { should eq 0 }
+    its(:stderr) { should eq "" }
+  end
+
 end
+

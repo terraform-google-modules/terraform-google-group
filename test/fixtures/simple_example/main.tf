@@ -14,19 +14,28 @@
  * limitations under the License.
  */
 
-provider "random" {
-  version = "~> 2.0"
-}
+# Delete the example groups if they exist. The groups might be left undeleted due
+# to previously failed test runs.
+resource "null_resource" "cleanup_groups" {
+  provisioner "local-exec" {
+    command = <<EOT
+      if gcloud beta identity groups describe example-group@${var.domain} 2>/dev/null ; then
+        gcloud beta identity groups delete example-group@${var.domain} --quiet
+      fi
 
-resource "random_pet" "main" {
-  length    = 1
-  prefix    = "simple-example"
-  separator = "-"
+      if gcloud beta identity groups describe example-child-group@${var.domain} 2>/dev/null ; then
+        gcloud beta identity groups delete example-child-group@${var.domain} --quiet
+      fi
+  EOT
+  }
 }
 
 module "example" {
   source = "../../../examples/simple_example"
 
-  project_id  = var.project_id
-  bucket_name = random_pet.main.id
+  project_id = var.project_id
+  domain     = var.domain
+  depends_on = [
+    null_resource.cleanup_groups
+  ]
 }

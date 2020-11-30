@@ -19,6 +19,10 @@ output "project_id" {
 }
 
 output "sa_key" {
-  value     = google_service_account_key.int_test.private_key
+  value     = data.terraform_remote_state.org.outputs.ci_gsuite_sa_key
   sensitive = true
+}
+
+output "domain" {
+  value = data.google_organization.org.domain
 }
