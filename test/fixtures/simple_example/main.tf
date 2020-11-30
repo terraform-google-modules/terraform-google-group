@@ -14,10 +14,29 @@
  * limitations under the License.
  */
 
+# Delete the example groups if they exist. The groups might be left undeleted due
+# to previously failed test runs.
+resource "null_resource" "cleanup_group" {
+  provisioner "local-exec" {
+    command = <<EOT
+      if gcloud beta identity groups describe example-group@${var.domain} 2>/dev/null ; then
+        gcloud beta identity groups delete example-group@${var.domain} --quiet
+      fi
+
+      if gcloud beta identity groups describe example-child-group@${var.domain} 2>/dev/null ; then
+        gcloud beta identity groups delete example-child-group@${var.domain} --quiet
+      fi
+  EOT
+  }
+}
+
 module "example" {
   source = "../../../examples/simple_example"
 
   project_id    = var.project_id
   domain        = var.domain
   sa_project_id = var.sa_project_id
+  depends_on = [
+    null_resource.cleanup_group
+  ]
 }

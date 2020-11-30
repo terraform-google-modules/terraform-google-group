@@ -36,7 +36,7 @@ resource "google_organization_iam_member" "sa_org" {
   member = "serviceAccount:${data.terraform_remote_state.org.outputs.ci_gsuite_sa_email}"
 }
 
-// Create a temporary project to host group member service accounts to pass to the examples.
+# Create a temporary project to host group member service accounts to pass to the examples.
 module "project" {
   source  = "terraform-google-modules/project-factory/google"
   version = "~> 9.0"
