@@ -17,8 +17,7 @@
 module "example" {
   source = "../../../examples/simple_example"
 
-  project_id                    = var.project_id
-  domain                        = var.domain
-  member_service_account_email  = var.member_service_account_email
-  manager_service_account_email = var.manager_service_account_email
+  project_id    = var.project_id
+  domain        = var.domain
+  sa_project_id = var.sa_project_id
 }

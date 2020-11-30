@@ -8,9 +8,8 @@ This example illustrates how to use the `group` module.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | domain | Domain of the organization to create the group in | `string` | n/a | yes |
-| manager\_service\_account\_email | Email of the service account to grant the MANAGER role in the group | `string` | n/a | yes |
-| member\_service\_account\_email | Email of the service account to grant the MEMBER role in the group | `string` | n/a | yes |
 | project\_id | The ID of the project in which to provision resources and used for billing | `string` | n/a | yes |
+| sa\_project\_id | The ID of the project in which to provision testing service accounts | `string` | n/a | yes |
 
 ## Outputs
 

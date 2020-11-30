@@ -24,12 +24,7 @@ output "domain" {
   value       = var.domain
 }
 
-output "member_service_account_email" {
-  description = "Email of the service account to grant the MEMBER role in the group"
-  value       = var.member_service_account_email
-}
-
-output "manager_service_account_email" {
-  description = "Email of the service account to grant the MANAGER role in the group"
-  value       = var.manager_service_account_email
+output "sa_project_id" {
+  description = "The ID of the project in which to provision testing service accounts"
+  value       = var.sa_project_id
 }

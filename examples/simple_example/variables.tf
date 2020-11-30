@@ -24,12 +24,7 @@ variable "domain" {
   type        = string
 }
 
-variable "member_service_account_email" {
-  description = "Email of the service account to grant the MEMBER role in the group"
-  type        = string
-}
-
-variable "manager_service_account_email" {
-  description = "Email of the service account to grant the MANAGER role in the group"
+variable "sa_project_id" {
+  description = "The ID of the project in which to provision testing service accounts"
   type        = string
 }

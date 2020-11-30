@@ -53,15 +53,3 @@ module "project" {
     "serviceusage.googleapis.com"
   ]
 }
-
-resource "google_service_account" "member" {
-  project      = module.project.project_id
-  account_id   = "example-member"
-  display_name = "example-member"
-}
-
-resource "google_service_account" "manager" {
-  project      = module.project.project_id
-  account_id   = "example-manager"
-  display_name = "example-manager"
-}

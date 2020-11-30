@@ -10,3 +10,6 @@ attributes:
   - name: domain
     required: true
     type: string
+  - name: sa_project_id
+    required: true
+    type: string
