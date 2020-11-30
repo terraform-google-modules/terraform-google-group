@@ -21,16 +21,16 @@ provider "google-beta" {
   billing_project       = var.project_id
 }
 
-resource "google_service_account" "member" {
-  project      = var.sa_project_id
-  account_id   = "example-member"
-  display_name = "example-member"
-}
-
 resource "google_service_account" "manager" {
   project      = var.sa_project_id
   account_id   = "example-manager"
   display_name = "example-manager"
+}
+
+resource "google_service_account" "member" {
+  project      = var.sa_project_id
+  account_id   = "example-member"
+  display_name = "example-member"
 }
 
 module "child_group" {
