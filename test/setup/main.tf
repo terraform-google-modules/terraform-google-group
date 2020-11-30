@@ -53,3 +53,13 @@ module "project" {
     "serviceusage.googleapis.com"
   ]
 }
+
+resource "google_project_iam_member" "sa_project" {
+  for_each = toset([
+    "roles/iam.serviceAccountAdmin"
+  ])
+
+  project = module.project.project_id
+  role    = each.value
+  member  = "serviceAccount:${data.terraform_remote_state.org.outputs.ci_gsuite_sa_email}"
+}
