@@ -15,11 +15,11 @@
  */
 
 # Required if using User ADCs (Application Default Credentials) for Cloud Identity API.
-provider "google-beta" {
-  version = "~> 3.0"
-  user_project_override = true
-  billing_project       = var.project_id
-}
+# provider "google-beta" {
+#   version               = "~> 3.0"
+#   user_project_override = true
+#   billing_project       = var.project_id
+# }
 
 resource "google_service_account" "manager" {
   project      = var.project_id

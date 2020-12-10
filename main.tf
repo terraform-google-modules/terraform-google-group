@@ -56,7 +56,7 @@ resource "google_cloud_identity_group_membership" "owners" {
 
   preferred_member_key { id = each.key }
 
-  # MEMBER role must be specified. The order of roles cannot be changed.
+  # MEMBER role must be specified. The order of roles should not be changed.
   roles { name = "OWNER" }
   roles { name = "MEMBER" }
 }
@@ -69,7 +69,7 @@ resource "google_cloud_identity_group_membership" "managers" {
 
   preferred_member_key { id = each.key }
 
-  # MEMBER role must be specified. The order of roles cannot be changed.
+  # MEMBER role must be specified. The order of roles should not be changed.
   roles { name = "MEMBER" }
   roles { name = "MANAGER" }
 }
