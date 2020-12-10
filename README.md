@@ -9,7 +9,7 @@ Basic usage of this module is as follows:
 
 ```hcl
 # Required if using User ADCs (Application Default Credentials) for Cloud Identity API.
-provider "google-beta" {
+provider "google" {
   user_project_override = true
   billing_project       = "<PROJECT_ID>"
 }

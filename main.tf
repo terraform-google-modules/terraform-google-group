@@ -33,7 +33,6 @@ locals {
 }
 
 resource "google_cloud_identity_group" "group" {
-  provider     = google-beta
   display_name = var.display_name
   description  = var.description
 
@@ -51,8 +50,7 @@ resource "google_cloud_identity_group" "group" {
 resource "google_cloud_identity_group_membership" "owners" {
   for_each = toset(var.owners)
 
-  provider = google-beta
-  group    = google_cloud_identity_group.group.id
+  group = google_cloud_identity_group.group.id
 
   preferred_member_key { id = each.key }
   roles { name = "OWNER" }
@@ -63,8 +61,7 @@ resource "google_cloud_identity_group_membership" "owners" {
 resource "google_cloud_identity_group_membership" "managers" {
   for_each = toset(var.managers)
 
-  provider = google-beta
-  group    = google_cloud_identity_group.group.id
+  group = google_cloud_identity_group.group.id
 
   preferred_member_key { id = each.key }
   roles { name = "MANAGER" }
@@ -75,8 +72,7 @@ resource "google_cloud_identity_group_membership" "managers" {
 resource "google_cloud_identity_group_membership" "members" {
   for_each = toset(var.members)
 
-  provider = google-beta
-  group    = google_cloud_identity_group.group.id
+  group = google_cloud_identity_group.group.id
 
   preferred_member_key { id = each.key }
   roles { name = "MEMBER" }
