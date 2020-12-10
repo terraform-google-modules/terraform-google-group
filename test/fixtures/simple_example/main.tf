@@ -19,12 +19,12 @@
 resource "null_resource" "cleanup_groups" {
   provisioner "local-exec" {
     command = <<EOT
-      if gcloud beta identity groups describe example-group@${var.domain} 2>/dev/null ; then
-        gcloud beta identity groups delete example-group@${var.domain} --quiet
+      if gcloud identity groups describe example-group@${var.domain} 2>/dev/null ; then
+        gcloud identity groups delete example-group@${var.domain} --quiet
       fi
 
-      if gcloud beta identity groups describe example-child-group@${var.domain} 2>/dev/null ; then
-        gcloud beta identity groups delete example-child-group@${var.domain} --quiet
+      if gcloud identity groups describe example-child-group@${var.domain} 2>/dev/null ; then
+        gcloud identity groups delete example-child-group@${var.domain} --quiet
       fi
   EOT
   }
