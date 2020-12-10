@@ -53,9 +53,9 @@ resource "google_cloud_identity_group_membership" "owners" {
   group = google_cloud_identity_group.group.id
 
   preferred_member_key { id = each.key }
-  # MEMBER role must be specified first.
-  roles { name = "MEMBER" }
+  # MEMBER role must be specified. The order of roles cannot be changed.
   roles { name = "OWNER" }
+  roles { name = "MEMBER" }
 }
 
 resource "google_cloud_identity_group_membership" "managers" {
@@ -64,7 +64,7 @@ resource "google_cloud_identity_group_membership" "managers" {
   group = google_cloud_identity_group.group.id
 
   preferred_member_key { id = each.key }
-  # MEMBER role must be specified first.
+  # MEMBER role must be specified. The order of roles cannot be changed.
   roles { name = "MEMBER" }
   roles { name = "MANAGER" }
 }
