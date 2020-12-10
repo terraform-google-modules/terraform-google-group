@@ -53,9 +53,9 @@ resource "google_cloud_identity_group_membership" "owners" {
   group = google_cloud_identity_group.group.id
 
   preferred_member_key { id = each.key }
-  roles { name = "OWNER" }
-  # MEMBER role must be specified.
+  # MEMBER role must be specified first.
   roles { name = "MEMBER" }
+  roles { name = "OWNER" }
 }
 
 resource "google_cloud_identity_group_membership" "managers" {
@@ -64,9 +64,9 @@ resource "google_cloud_identity_group_membership" "managers" {
   group = google_cloud_identity_group.group.id
 
   preferred_member_key { id = each.key }
-  roles { name = "MANAGER" }
-  # MEMBER role must be specified.
+  # MEMBER role must be specified first.
   roles { name = "MEMBER" }
+  roles { name = "MANAGER" }
 }
 
 resource "google_cloud_identity_group_membership" "members" {
