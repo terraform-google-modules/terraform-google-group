@@ -26,3 +26,7 @@ output "sa_key" {
 output "domain" {
   value = data.google_organization.org.domain
 }
+
+output "suffix" {
+  value = random_id.random_group_suffix.hex
+}

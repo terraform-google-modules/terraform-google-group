@@ -15,11 +15,11 @@
  */
 
 # Required if using User ADCs (Application Default Credentials) for Cloud Identity API.
-# provider "google-beta" {
-#   version               = "~> 3.0"
-#   user_project_override = true
-#   billing_project       = var.project_id
-# }
+provider "google-beta" {
+  version               = "~> 3.0"
+  user_project_override = true
+  billing_project       = var.project_id
+}
 
 resource "google_service_account" "manager" {
   project      = var.project_id
@@ -36,9 +36,9 @@ resource "google_service_account" "member" {
 module "inner_group" {
   source = "../.."
 
-  id           = "example-inner-group@${var.domain}"
-  display_name = "example-inner-group"
-  description  = "Example inner group"
+  id           = "group-module-test-inner-group-${var.suffix}@${var.domain}"
+  display_name = "group-module-test-inner-group-${var.suffix}"
+  description  = "Group module test inner group ${var.suffix}"
   domain       = var.domain
   managers     = ["${google_service_account.manager.account_id}@${var.project_id}.iam.gserviceaccount.com"]
   members      = ["${google_service_account.member.account_id}@${var.project_id}.iam.gserviceaccount.com"]
@@ -47,9 +47,9 @@ module "inner_group" {
 module "group" {
   source = "../.."
 
-  id           = "example-group@${var.domain}"
-  display_name = "example-group"
-  description  = "Example group"
+  id           = "group-module-test-group-${var.suffix}@${var.domain}"
+  display_name = "group-module-test-${var.suffix}"
+  description  = "Group module test group ${var.suffix}"
   domain       = var.domain
   members      = [module.inner_group.id]
 }
