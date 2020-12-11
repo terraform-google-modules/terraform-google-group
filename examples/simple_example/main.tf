@@ -16,7 +16,7 @@
 
 # Required if using User ADCs (Application Default Credentials) for Cloud Identity API.
 # provider "google-beta" {
-#   version = "~> 3.0"
+#   version               = "~> 3.0"
 #   user_project_override = true
 #   billing_project       = var.project_id
 # }
@@ -33,12 +33,12 @@ resource "google_service_account" "member" {
   display_name = "example-member"
 }
 
-module "child_group" {
+module "inner_group" {
   source = "../.."
 
-  id           = "example-child-group@${var.domain}"
-  display_name = "example-child-group"
-  description  = "Example child group"
+  id           = "example-inner-group@${var.domain}"
+  display_name = "example-inner-group"
+  description  = "Example inner group"
   domain       = var.domain
   managers     = ["${google_service_account.manager.account_id}@${var.project_id}.iam.gserviceaccount.com"]
   members      = ["${google_service_account.member.account_id}@${var.project_id}.iam.gserviceaccount.com"]
@@ -51,5 +51,5 @@ module "group" {
   display_name = "example-group"
   description  = "Example group"
   domain       = var.domain
-  members      = [module.child_group.id]
+  members      = [module.inner_group.id]
 }
