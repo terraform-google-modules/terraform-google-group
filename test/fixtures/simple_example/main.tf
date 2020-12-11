@@ -19,8 +19,7 @@
 resource "null_resource" "cleanup_groups" {
   provisioner "local-exec" {
     command = <<EOT
-      gcloud beta identity groups delete example-group@${var.domain} --quiet && \
-      gcloud beta identity groups delete example-inner-group@${var.domain} --quiet
+      gcloud beta identity groups delete example-inner-group@${var.domain} --quiet --project ${var.project_id}
   EOT
   }
 }
