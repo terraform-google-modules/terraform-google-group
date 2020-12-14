@@ -48,7 +48,7 @@ module "group" {
   source = "../.."
 
   id           = "group-module-test-group-${var.suffix}@${var.domain}"
-  display_name = "group-module-test-${var.suffix}"
+  display_name = "group-module-test-group-${var.suffix}"
   description  = "Group module test group ${var.suffix}"
   domain       = var.domain
   members      = [module.inner_group.id]
