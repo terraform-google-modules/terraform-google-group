@@ -63,7 +63,7 @@ limitations:
     ([link](https://github.com/hashicorp/terraform-provider-google/issues/7616)).
 
 * Updating a `google_cloud_identity_group_membership` to change the role of a
-    member fails with the following error due to Terraform tries to create the
+    member fails with the following error due to Terraform trying to create the
     new role assignment before/at the same time as the old one is removed.
     Rerunning the same deployment twice might resolve the issue.
 
