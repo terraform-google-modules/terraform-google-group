@@ -10,3 +10,6 @@ attributes:
   - name: domain
     required: true
     type: string
+  - name: suffix
+    required: true
+    type: string

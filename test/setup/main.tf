@@ -14,6 +14,17 @@
  * limitations under the License.
  */
 
+// Have to add the random ID here and pass the value to tests instead of directly
+// generate a random ID in tests because for_each in the module will complain
+// the random ID is not known until apply.
+provider "random" {
+  version = "~> 2.0"
+}
+
+resource "random_id" "random_group_suffix" {
+  byte_length = 2
+}
+
 data "terraform_remote_state" "org" {
   backend = "gcs"
   config = {

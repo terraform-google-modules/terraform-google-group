@@ -15,27 +15,27 @@
 control "gcloud" do
   title "gcloud"
 
-  describe command("gcloud beta identity groups describe example-group@#{attribute("domain")} --project=#{attribute("project_id")}") do
+  describe command("gcloud beta identity groups describe group-module-test-group-#{attribute("suffix")}@#{attribute("domain")} --project=#{attribute("project_id")}") do
     its(:exit_status) { should eq 0 }
     its(:stderr) { should eq "" }
   end
 
-  describe command("gcloud beta identity groups describe example-inner-group@#{attribute("domain")} --project=#{attribute("project_id")}") do
+  describe command("gcloud beta identity groups describe group-module-test-inner-group-#{attribute("suffix")}@#{attribute("domain")} --project=#{attribute("project_id")}") do
     its(:exit_status) { should eq 0 }
     its(:stderr) { should eq "" }
   end
 
-  describe command("gcloud beta identity groups memberships describe --group-email example-group@#{attribute("domain")} --member-email example-inner-group@#{attribute("domain")} --project=#{attribute("project_id")}") do
+  describe command("gcloud beta identity groups memberships describe --group-email group-module-test-group-#{attribute("suffix")}@#{attribute("domain")} --member-email group-module-test-inner-group-#{attribute("suffix")}@#{attribute("domain")} --project=#{attribute("project_id")}") do
     its(:exit_status) { should eq 0 }
     its(:stderr) { should eq "" }
   end
 
-  describe command("gcloud beta identity groups memberships describe --group-email example-inner-group@#{attribute("domain")} --member-email example-manager@#{attribute("project_id")}.iam.gserviceaccount.com --project=#{attribute("project_id")}") do
+  describe command("gcloud beta identity groups memberships describe --group-email group-module-test-inner-group-#{attribute("suffix")}@#{attribute("domain")} --member-email example-manager@#{attribute("project_id")}.iam.gserviceaccount.com --project=#{attribute("project_id")}") do
     its(:exit_status) { should eq 0 }
     its(:stderr) { should eq "" }
   end
 
-  describe command("gcloud beta identity groups memberships describe --group-email example-inner-group@#{attribute("domain")} --member-email example-member@#{attribute("project_id")}.iam.gserviceaccount.com --project=#{attribute("project_id")}") do
+  describe command("gcloud beta identity groups memberships describe --group-email group-module-test-inner-group-#{attribute("suffix")}@#{attribute("domain")} --member-email example-member@#{attribute("project_id")}.iam.gserviceaccount.com --project=#{attribute("project_id")}") do
     its(:exit_status) { should eq 0 }
     its(:stderr) { should eq "" }
   end

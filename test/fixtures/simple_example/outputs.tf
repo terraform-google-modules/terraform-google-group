@@ -23,3 +23,8 @@ output "domain" {
   description = "Domain of the organization to create the group in"
   value       = var.domain
 }
+
+output "suffix" {
+  description = "Suffix of the groups to create"
+  value       = var.suffix
+}
