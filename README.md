@@ -62,6 +62,28 @@ limitations:
     with an error
     ([link](https://github.com/hashicorp/terraform-provider-google/issues/7616)).
 
+* Updating a `google_cloud_identity_group_membership` to change the role of a
+    member fails with the following error due to Terraform trying to create the
+    new role assignment before/at the same time as the old one is removed.
+    Rerunning the same deployment twice might resolve the issue.
+
+    ```bash
+    Error: Error creating GroupMembership: googleapi: Error 409: Error(4003): Cannot create membership 'user@example.com' in 'groups/xxx' because it already exists.
+    Details:
+    [
+      {
+        "@type": "type.googleapis.com/google.rpc.ResourceInfo",
+        "description": "Error(4003): Cannot create membership 'user@example.com' in 'groups/xxx' because it already exists.",
+        "owner": "domain:cloudidentity.googleapis.com",
+        "resourceType": "cloudidentity.googleapis.com/Membership"
+      },
+      {
+        "@type": "type.googleapis.com/google.rpc.DebugInfo",
+        "detail": "[ORIGINAL ERROR] generic::already_exists: Error(4003): Cannot create membership 'user@example.com' in 'groups/xxx' because it already exists.\ncom.google.ccc.hosted.api.oneplatform.cloudidentity.error.exceptions.OpAlreadyExistsException: Error(4003): Cannot create membership 'user@example.com' in 'groups/xxx' because it already exists. [google.rpc.error_details_ext] { message: \"Error(4003): Cannot create membership \\'user@example.com\\' in \\'groups/xxx\\' because it already exists.\" details { [type.googleapis.com/google.rpc.ResourceInfo] { resource_type: \"cloudidentity.googleapis.com/Membership\" owner: \"domain:cloudidentity.googleapis.com\" description: \"Error(4003): Cannot create membership \\'user@example.com\\' in \\'groups/xxx\\' because it already exists.\" } } }"
+      }
+    ]
+    ```
+
 * [InitialGroupConfig](https://cloud.google.com/identity/docs/reference/rest/v1beta1/groups/create#initialgroupconfig)
     is not supported in the `google_cloud_identity_group` resource, which
     prevents non-admins from creating groups in an organization, even when the
