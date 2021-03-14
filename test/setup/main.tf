@@ -50,14 +50,13 @@ resource "google_organization_iam_member" "sa_org" {
 # Create a temporary project to host group member service accounts to pass to the examples.
 module "project" {
   source  = "terraform-google-modules/project-factory/google"
-  version = "~> 9.0"
+  version = "~> 10.0"
 
-  name                 = "ci-group"
-  random_project_id    = "true"
-  org_id               = var.org_id
-  folder_id            = var.folder_id
-  billing_account      = var.billing_account
-  skip_gcloud_download = true
+  name              = "ci-group"
+  random_project_id = "true"
+  org_id            = var.org_id
+  folder_id         = var.folder_id
+  billing_account   = var.billing_account
 
   activate_apis = [
     "cloudresourcemanager.googleapis.com",
