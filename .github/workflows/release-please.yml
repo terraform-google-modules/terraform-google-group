@@ -12,3 +12,4 @@
            token: ${{ secrets.GITHUB_TOKEN }}
            release-type: terraform-module
            package-name: release-please-action
+           bump-minor-pre-major: Yes
