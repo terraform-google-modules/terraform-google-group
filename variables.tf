@@ -58,3 +58,8 @@ variable "members" {
   description = "Members of the group. Each entry is the ID of an entity. For Google-managed entities, the ID must be the email address of an existing group, user or service account"
   default     = []
 }
+
+variable "initial_group_config" {
+  description = "The initial configuration options for creating a Group. See the API reference for possible values. Possible values are INITIAL_GROUP_CONFIG_UNSPECIFIED, WITH_INITIAL_OWNER, and EMPTY."
+  default     = "EMPTY"
+}

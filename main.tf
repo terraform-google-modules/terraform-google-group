@@ -39,6 +39,8 @@ resource "google_cloud_identity_group" "group" {
 
   parent = "customers/${local.customer_id}"
 
+  initial_group_config = var.initial_group_config
+
   group_key {
     id = var.id
   }
