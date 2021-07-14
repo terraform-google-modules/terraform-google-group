@@ -40,6 +40,7 @@ Functional examples are included in the [examples](./examples/) directory.
 | display\_name | Display name of the group | `string` | `""` | no |
 | domain | Domain of the organization to create the group in. One of domain or customer\_id must be specified | `string` | `""` | no |
 | id | ID of the group. For Google-managed entities, the ID must be the email address the group | `any` | n/a | yes |
+| initial\_group\_config | The initial configuration options for creating a Group. See the API reference for possible values. Possible values are INITIAL\_GROUP\_CONFIG\_UNSPECIFIED, WITH\_INITIAL\_OWNER, and EMPTY. | `string` | `"EMPTY"` | no |
 | managers | Managers of the group. Each entry is the ID of an entity. For Google-managed entities, the ID must be the email address of an existing group, user or service account | `list` | `[]` | no |
 | members | Members of the group. Each entry is the ID of an entity. For Google-managed entities, the ID must be the email address of an existing group, user or service account | `list` | `[]` | no |
 | owners | Owners of the group. Each entry is the ID of an entity. For Google-managed entities, the ID must be the email address of an existing group, user or service account | `list` | `[]` | no |
@@ -84,11 +85,6 @@ limitations:
     ]
     ```
 
-* [InitialGroupConfig](https://cloud.google.com/identity/docs/reference/rest/v1beta1/groups/create#initialgroupconfig)
-    is not supported in the `google_cloud_identity_group` resource, which
-    prevents non-admins from creating groups in an organization, even when the
-    organization is configured to allow anyone to create groups.
-
 * Only
     [Google Groups](https://cloud.google.com/identity/docs/groups#group_properties)
     are supported.
@@ -103,7 +99,7 @@ These sections describe requirements for using this module.
 
 The following dependencies must be available:
 
-* [Terraform][terraform] v0.12
+* [Terraform][terraform] v0.13
 * [Terraform Provider for GCP][terraform-provider-gcp] plugin v2.0
 
 ### Permissions
