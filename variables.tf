@@ -65,6 +65,7 @@ variable "initial_group_config" {
 }
 
 variable "allow_external_members" {
+  description = "Allow adding external members of the organization"
   type = bool
   default = false
 }

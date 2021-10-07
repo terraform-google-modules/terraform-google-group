@@ -35,6 +35,7 @@ Functional examples are included in the [examples](./examples/) directory.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| allow\_external\_members | Allow adding external members of the organization | `bool` | `false` | no |
 | customer\_id | Customer ID of the organization to create the group in. One of domain or customer\_id must be specified | `string` | `""` | no |
 | description | Description of the group | `string` | `""` | no |
 | display\_name | Display name of the group | `string` | `""` | no |
