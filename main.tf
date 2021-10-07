@@ -50,6 +50,12 @@ resource "google_cloud_identity_group" "group" {
   }
 }
 
+resource "googleworkspace_group_settings" "enable_allow_external_members" {
+  email = google_cloud_identity_group.group.group_key[0].id
+  allow_external_members = var.allow_external_members
+}
+
+
 resource "google_cloud_identity_group_membership" "owners" {
   for_each = toset(var.owners)
 
