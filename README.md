@@ -139,6 +139,18 @@ membership, and OWNER can delete the group. Documentation around the three group
 default roles (OWNER, MANAGER and MEMBER) can be found
 [here](https://support.google.com/a/answer/167094?hl=en).
 
+###### optionnal configuration
+
+The Google workspace provider can be used to allow external users to be member of a group but you must be aware of what you're doing.
+First, the user must have admin role in cloud identity channel and manage securely the service account key.
+
+https://registry.terraform.io/providers/hashicorp/googleworkspace/latest/docs
+
+Here is some way to follow:
+
+- use secure key manager like "Vault" to store your key service-account
+- use deployment template to get the key value during the pipeline
+
 ### APIs
 
 A project with the following APIs enabled must be used to host the resources of
