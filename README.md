@@ -142,14 +142,14 @@ default roles (OWNER, MANAGER and MEMBER) can be found
 ###### optional configuration
 
 The Google workspace provider can be used to allow external users to be member of a group but you must be aware of what you're doing.
-First, the user must have admin role in cloud identity channel and manage securely the service account key.
+Rhe user must have admin role in cloud identity channel and manage securely the service account key.
 
 https://registry.terraform.io/providers/hashicorp/googleworkspace/latest/docs
 
-here is some rule to follow:
+here is some rules to follow:
 
-- use secure key manager like "Vault" to store your key service-account
-- use deployment template to get the key value during the pipeline
+- use a secure key manager like "GCP Secrets" or "Vault" to store your service-account key
+- use a deployment template to get the key value during the pipeline or as environment variable
 
 ### APIs
 
