@@ -51,7 +51,7 @@ resource "google_cloud_identity_group" "group" {
 }
 
 resource "googleworkspace_group_settings" "enable_allow_external_members" {
-  count                  = allow_external_members == true ? 1 : 0
+  count                  = var.allow_external_members == true ? 1 : 0
   email                  = google_cloud_identity_group.group.group_key[0].id
   allow_external_members = var.allow_external_members
 }
