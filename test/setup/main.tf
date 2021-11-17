@@ -18,7 +18,6 @@
 // generate a random ID in tests because for_each in the module will complain
 // the random ID is not known until apply.
 provider "random" {
-  version = "~> 2.0"
 }
 
 resource "random_id" "random_group_suffix" {
