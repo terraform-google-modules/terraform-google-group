@@ -8,6 +8,13 @@ and this project adheres to
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 This changelog is generated automatically based on [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/).
 
+## [0.4.0](https://www.github.com/terraform-google-modules/terraform-google-group/compare/v0.3.0...v0.4.0) (2021-11-17)
+
+
+### Features
+
+* update TPG version constraints to allow 4.0 ([#27](https://www.github.com/terraform-google-modules/terraform-google-group/issues/27)) ([8619bb3](https://www.github.com/terraform-google-modules/terraform-google-group/commit/8619bb32531b3f35305d539fc2fab892496aec4f))
+
 ## [0.3.0](https://www.github.com/terraform-google-modules/terraform-google-group/compare/v0.2.0...v0.3.0) (2021-07-14)
 
 
