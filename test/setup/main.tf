@@ -49,7 +49,7 @@ resource "google_organization_iam_member" "sa_org" {
 # Create a temporary project to host group member service accounts to pass to the examples.
 module "project" {
   source  = "terraform-google-modules/project-factory/google"
-  version = "~> 10.0"
+  version = "~> 14.0"
 
   name              = "ci-group"
   random_project_id = "true"
