@@ -63,7 +63,7 @@ variable "initial_group_config" {
   description = "The initial configuration options for creating a Group. See the API reference for possible values. Possible values are INITIAL_GROUP_CONFIG_UNSPECIFIED, WITH_INITIAL_OWNER, and EMPTY."
   default     = "EMPTY"
 }
-   
+
 variable "label_keys" {
   description = "Labels to apply to the group. Currently only 'default' is supported"
   default = [
