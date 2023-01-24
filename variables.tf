@@ -64,7 +64,9 @@ variable "initial_group_config" {
   default     = "EMPTY"
 }
    
-variable "lifecycle_ignore_changes" {
-  description = "Enables a possibility to ignore changes. Useful for existing labels" 
-  default = []
+variable "label_keys" {
+  description = "Labels to apply to the group. Currently only 'default' is supported"
+  default = [
+    "default"
+  ]
 }
