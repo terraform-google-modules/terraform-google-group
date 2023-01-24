@@ -30,6 +30,9 @@ locals {
     "security" = "cloudidentity.googleapis.com/groups.security"
     "external" = "system/groups/external"
   }
+  required_labels = {
+    for label_name in var.label_keys : local.label_keys[label_name] => ""
+  }
 }
 
 resource "google_cloud_identity_group" "group" {
@@ -45,9 +48,7 @@ resource "google_cloud_identity_group" "group" {
     id = var.id
   }
 
-  labels = {
-    local.label_keys[local.type] = ""
-  }
+  labels = local.required_labels
 }
 
 resource "google_cloud_identity_group_membership" "owners" {
