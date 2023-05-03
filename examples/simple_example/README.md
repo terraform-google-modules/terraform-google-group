@@ -13,7 +13,10 @@ This example illustrates how to use the `group` module.
 
 ## Outputs
 
-No output.
+| Name | Description |
+|------|-------------|
+| group\_id | n/a |
+| group\_name | n/a |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 

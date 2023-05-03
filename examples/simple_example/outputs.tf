@@ -13,3 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+output "group_id" {
+  value = module.group.id
+}
+
+output "group_name" {
+  value = module.group.name
+}
