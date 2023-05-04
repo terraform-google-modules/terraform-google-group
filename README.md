@@ -50,6 +50,7 @@ Functional examples are included in the [examples](./examples/) directory.
 | Name | Description |
 |------|-------------|
 | id | ID of the group. For Google-managed entities, the ID is the email address the group |
+| name | Name of the group with the domain removed. For Google-managed entities, the ID is the email address the group |
 | resource\_name | Resource name of the group in the format: groups/{group\_id}, where group\_id is the unique ID assigned to the group. |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
