@@ -39,11 +39,11 @@ Functional examples are included in the [examples](./examples/) directory.
 | description | Description of the group | `string` | `""` | no |
 | display\_name | Display name of the group | `string` | `""` | no |
 | domain | Domain of the organization to create the group in. One of domain or customer\_id must be specified | `string` | `""` | no |
-| id | ID of the group. For Google-managed entities, the ID must be the email address the group | `any` | n/a | yes |
+| id | ID of the group. For Google-managed entities, the ID must be the email address the group | `string` | n/a | yes |
 | initial\_group\_config | The initial configuration options for creating a Group. See the API reference for possible values. Possible values are INITIAL\_GROUP\_CONFIG\_UNSPECIFIED, WITH\_INITIAL\_OWNER, and EMPTY. | `string` | `"EMPTY"` | no |
-| managers | Managers of the group. Each entry is the ID of an entity. For Google-managed entities, the ID must be the email address of an existing group, user or service account | `list` | `[]` | no |
-| members | Members of the group. Each entry is the ID of an entity. For Google-managed entities, the ID must be the email address of an existing group, user or service account | `list` | `[]` | no |
-| owners | Owners of the group. Each entry is the ID of an entity. For Google-managed entities, the ID must be the email address of an existing group, user or service account | `list` | `[]` | no |
+| managers | Managers of the group. Each entry is the ID of an entity. For Google-managed entities, the ID must be the email address of an existing group, user or service account | `list(string)` | `[]` | no |
+| members | Members of the group. Each entry is the ID of an entity. For Google-managed entities, the ID must be the email address of an existing group, user or service account | `list(string)` | `[]` | no |
+| owners | Owners of the group. Each entry is the ID of an entity. For Google-managed entities, the ID must be the email address of an existing group, user or service account | `list(string)` | `[]` | no |
 | types | The type of the group to be created. More info: https://cloud.google.com/identity/docs/groups#group_properties | `list(string)` | <pre>[<br>  "default"<br>]</pre> | no |
 
 ## Outputs
