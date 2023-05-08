@@ -58,13 +58,13 @@ variable "initial_group_config" {
   default     = "EMPTY"
 }
 
-variable "group_types" {
+variable "types" {
   type        = list(string)
   description = "The type of the group to be created. More info: https://cloud.google.com/identity/docs/groups#group_properties"
   default     = ["default"]
   validation {
     condition = alltrue(
-      [for t in var.group_types : contains(["default", "dynamic", "security", "external"], t)]
+      [for t in var.types : contains(["default", "dynamic", "security", "external"], t)]
     )
     error_message = "Valid values for group types are \"default\", \"dynamic\", \"security\", \"external\"."
   }

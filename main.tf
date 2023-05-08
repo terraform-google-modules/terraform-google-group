@@ -45,7 +45,7 @@ resource "google_cloud_identity_group" "group" {
     id = var.id
   }
 
-  labels = { for type in var.group_types : local.label_keys[type] => "" }
+  labels = { for t in var.types : local.label_keys[t] => "" }
 }
 
 resource "google_cloud_identity_group_membership" "owners" {
