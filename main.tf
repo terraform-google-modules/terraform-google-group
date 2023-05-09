@@ -21,14 +21,14 @@ data "google_organization" "org" {
 
 locals {
   customer_id = var.domain != "" ? data.google_organization.org[0].directory_customer_id : var.customer_id
-  type        = "default"
   label_keys = {
-    "default" = "cloudidentity.googleapis.com/groups.discussion_forum"
-    # Placeholders according to https://cloud.google.com/identity/docs/groups#group_properties.
-    # Not supported by provider yet.
+    "default"  = "cloudidentity.googleapis.com/groups.discussion_forum"
     "dynamic"  = "cloudidentity.googleapis.com/groups.dynamic"
     "security" = "cloudidentity.googleapis.com/groups.security"
     "external" = "system/groups/external"
+    # Placeholders according to https://cloud.google.com/identity/docs/groups#group_properties.
+    # Not supported by provider yet.
+    "posix" = "cloudidentity.googleapis.com/groups.posix"
   }
 }
 
@@ -45,9 +45,7 @@ resource "google_cloud_identity_group" "group" {
     id = var.id
   }
 
-  labels = {
-    local.label_keys[local.type] = ""
-  }
+  labels = { for t in var.types : local.label_keys[t] => "" }
 }
 
 resource "google_cloud_identity_group_membership" "owners" {
