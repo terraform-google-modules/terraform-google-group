@@ -8,6 +8,13 @@ and this project adheres to
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 This changelog is generated automatically based on [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/).
 
+## [0.6.0](https://github.com/terraform-google-modules/terraform-google-group/compare/v0.5.0...v0.6.0) (2023-05-09)
+
+
+### Features
+
+* adds group types var to the root module ([#49](https://github.com/terraform-google-modules/terraform-google-group/issues/49)) ([dec1114](https://github.com/terraform-google-modules/terraform-google-group/commit/dec11146023c5de7ad637b4056360f507a9829fc))
+
 ## [0.5.0](https://github.com/terraform-google-modules/terraform-google-group/compare/v0.4.0...v0.5.0) (2023-05-04)
 
 
