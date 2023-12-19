@@ -34,7 +34,8 @@ resource "google_service_account" "member" {
 }
 
 module "inner_group" {
-  source = "../.."
+  source  = "terraform-google-modules/group/google"
+  version = "~> 0.6"
 
   id           = "group-module-test-inner-group-${var.suffix}@${var.domain}"
   display_name = "group-module-test-inner-group-${var.suffix}"
@@ -45,7 +46,8 @@ module "inner_group" {
 }
 
 module "group" {
-  source = "../.."
+  source  = "terraform-google-modules/group/google"
+  version = "~> 0.6"
 
   id           = "group-module-test-group-${var.suffix}@${var.domain}"
   display_name = "group-module-test-group-${var.suffix}"
