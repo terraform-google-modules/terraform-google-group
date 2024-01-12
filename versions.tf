@@ -29,11 +29,11 @@ terraform {
   }
 
   provider_meta "google" {
-    module_name = "blueprints/terraform/terraform-google-group/v0.6.0"
+    module_name = "blueprints/terraform/terraform-google-group/v0.6.1"
   }
 
   provider_meta "google-beta" {
-    module_name = "blueprints/terraform/terraform-google-group/v0.6.0"
+    module_name = "blueprints/terraform/terraform-google-group/v0.6.1"
   }
 
 }
