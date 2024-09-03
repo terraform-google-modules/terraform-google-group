@@ -16,7 +16,7 @@ provider "google-beta" {
 
 module "group" {
   source  = "terraform-google-modules/group/google"
-  version = "~> 0.6"
+  version = "~> 0.7"
 
   id           = "example-group@example.com"
   display_name = "example-group"
