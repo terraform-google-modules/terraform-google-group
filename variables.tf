@@ -78,3 +78,14 @@ variable "types" {
     error_message = "Valid values for group types are \"default\", \"dynamic\", \"security\", \"external\"."
   }
 }
+
+variable "member_expiry_time" {
+  type        = string
+  description = "The time at which the MembershipRole will expire. A timestamp in RFC3339 UTC \"Zulu\" format, with nanosecond resolution and up to nine fractional digits. Examples: \"2014-10-02T15:01:23Z\" and \"2014-10-02T15:01:23.045123456Z\"."
+  default     = ""
+
+  validation {
+    condition     = regex("^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]{1,9})?Z$", var.member_expiry_time)
+    error_message = "The member_expiry_time must be a valid RFC3339 UTC \"Zulu\" format timestamp with optional nanosecond resolution."
+  }
+}

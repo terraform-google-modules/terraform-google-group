@@ -42,6 +42,7 @@ Functional examples are included in the [examples](./examples/) directory.
 | id | ID of the group. For Google-managed entities, the ID must be the email address the group | `string` | n/a | yes |
 | initial\_group\_config | The initial configuration options for creating a Group. See the API reference for possible values. Possible values are INITIAL\_GROUP\_CONFIG\_UNSPECIFIED, WITH\_INITIAL\_OWNER, and EMPTY. | `string` | `"EMPTY"` | no |
 | managers | Managers of the group. Each entry is the ID of an entity. For Google-managed entities, the ID must be the email address of an existing group, user or service account | `list(string)` | `[]` | no |
+| member\_expiry\_time | The time at which the MembershipRole will expire. A timestamp in RFC3339 UTC "Zulu" format, with nanosecond resolution and up to nine fractional digits. Examples: "2014-10-02T15:01:23Z" and "2014-10-02T15:01:23.045123456Z". | `string` | `""` | no |
 | members | Members of the group. Each entry is the ID of an entity. For Google-managed entities, the ID must be the email address of an existing group, user or service account | `list(string)` | `[]` | no |
 | owners | Owners of the group. Each entry is the ID of an entity. For Google-managed entities, the ID must be the email address of an existing group, user or service account | `list(string)` | `[]` | no |
 | types | The type of the group to be created. More info: https://cloud.google.com/identity/docs/groups#group_properties | `list(string)` | <pre>[<br>  "default"<br>]</pre> | no |
