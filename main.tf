@@ -24,6 +24,7 @@ locals {
   label_keys = {
     "default"  = "cloudidentity.googleapis.com/groups.discussion_forum"
     "dynamic"  = "cloudidentity.googleapis.com/groups.dynamic"
+    "locked"   = "cloudidentity.googleapis.com/groups.locked"
     "security" = "cloudidentity.googleapis.com/groups.security"
     "external" = "system/groups/external"
     # Placeholders according to https://cloud.google.com/identity/docs/groups#group_properties.
