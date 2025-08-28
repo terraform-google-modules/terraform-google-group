@@ -8,6 +8,13 @@ and this project adheres to
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 This changelog is generated automatically based on [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/).
 
+## [0.8.0](https://github.com/terraform-google-modules/terraform-google-group/compare/v0.7.0...v0.8.0) (2025-08-28)
+
+
+### Features
+
+* **deps:** Update Terraform Google Provider to v7 (major) ([#84](https://github.com/terraform-google-modules/terraform-google-group/issues/84)) ([c7a0852](https://github.com/terraform-google-modules/terraform-google-group/commit/c7a0852e9a751c4cbc5171086c8d8277dd2e30b8))
+
 ## [0.7.0](https://github.com/terraform-google-modules/terraform-google-group/compare/v0.6.1...v0.7.0) (2024-08-29)
 
 
