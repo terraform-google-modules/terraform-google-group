@@ -82,4 +82,11 @@ resource "google_cloud_identity_group_membership" "members" {
 
   preferred_member_key { id = each.key }
   roles { name = "MEMBER" }
+
+  dynamic "expiry_detail" {
+    count = can(var.member_expiry_time) ? 1 : 0
+    content {
+      expiry_time = var.member_expiry_time
+    }
+  }
 }
