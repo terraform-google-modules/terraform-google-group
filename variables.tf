@@ -73,8 +73,8 @@ variable "types" {
   default     = ["default"]
   validation {
     condition = alltrue(
-      [for t in var.types : contains(["default", "dynamic", "security", "external"], t)]
+      [for t in var.types : contains(["default", "dynamic", "locked", "security", "external"], t)]
     )
-    error_message = "Valid values for group types are \"default\", \"dynamic\", \"security\", \"external\"."
+    error_message = "Valid values for group types are \"default\", \"dynamic\", \"locked\", \"security\", \"external\"."
   }
 }
