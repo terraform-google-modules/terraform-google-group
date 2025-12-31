@@ -41,6 +41,11 @@ variable "customer_id" {
   type        = string
   description = "Customer ID of the organization to create the group in. One of domain or customer_id must be specified"
   default     = ""
+
+  validation {
+    condition     = var.customer_id == "" || can(regex("^C0[a-z0-9]{7}$", var.customer_id))
+    error_message = "customer_id must be in the form C0xxxxxxx (without the 'customers/' prefix)."
+  }
 }
 
 variable "owners" {
